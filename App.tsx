@@ -1,55 +1,58 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Alert, ScrollView} from 'react-native';
-import Header from './src/header';
-import Generator from './src/generator';
-import NumList from './src/numlist';
-
-const stateArr = {
-  appName: 'My First App',
-  random: [36, 999],
-};
+import {
+  View,
+  StyleSheet,
+  Button,
+  TextInput,
+  ScrollView,
+  Text,
+} from 'react-native';
 
 const App = () => {
-  const [state, setState] = useState(stateArr);
-
-  const onAddRandomNum = () => {
-    const randomNum = Math.floor(Math.random() * 100) + 1;
-    setState(prevState => {
-      return {...prevState, random: [...prevState.random, randomNum]};
-    });
+  const inputState = {
+    myTextInput: 'sadadsdf',
+    alphabet: ['a', 'b', 'c', 'd'],
   };
 
-  const onNumDelete = position => {
-    const newArray = state.random.filter((num, index) => {
-      return position !== index;
-    });
+  const [state, setState] = useState(inputState);
+
+  const onChangeInput = event => {
     setState(prevState => ({
       ...prevState,
-      random: newArray,
+      myTextInput: event,
     }));
   };
 
+  const onAddTextInput = () => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        myTextInput: '',
+        alphabet: [...prevState.alphabet, prevState.myTextInput],
+      };
+    });
+  };
   return (
     <View style={styles.mainView}>
-      <Header name={state.appName} />
-      <View>
-        <Text style={styles.mainText} onPress={() => Alert.alert('helloworld')}>
-          Hello World
-        </Text>
-      </View>
+      <TextInput
+        style={styles.input}
+        value={state.myTextInput}
+        onChangeText={onChangeInput}
+        multiline={true}
+        //maxLength={30}
+        autoCapitalize={'none'}
+      />
+      <Button title="Add Text Input" onPress={onAddTextInput} />
 
-      <Generator add={onAddRandomNum} />
-
-      <ScrollView
-        style={{width: '100%'}}
-        // onMomentumScrollBegin={() => Alert.alert('begin')}
-        // onMomentumScrollEnd={() => Alert.alert('begin')}>
-        // onScroll={() => Alert.alert('Scrolling')}
-
-        //</View>onContentSizeChange={(width, height) => Alert.alert(height.toString())}
-        bounces={false}>
-        <NumList num={state.random} onDelete={onNumDelete} />
+      <ScrollView style={{width: '100%'}}>
+        <View>
+          {state.alphabet.map((item, index) => (
+            <Text style={styles.mainText} key={index}>
+              {item}
+            </Text>
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
@@ -82,5 +85,14 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: 'red',
     padding: 20,
+    margin: 20,
+    backgroundColor: 'pink',
+  },
+  input: {
+    width: '100%',
+    backgroundColor: '#cecece',
+    marginTop: 20,
+    fontSize: 25,
+    padding: 10,
   },
 });
