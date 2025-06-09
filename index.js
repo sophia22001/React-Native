@@ -1,5 +1,5 @@
 /**
- * @format
+ * @format // 자동 포맷 적용 대상
  */
 
 import {AppRegistry} from 'react-native';
