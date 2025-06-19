@@ -6,23 +6,16 @@ import HomeScreen from './src/navigation/stack/home';
 import UserScreen from './src/navigation/stack/user';
 import ProfileScreen from './src/navigation/stack/profile';
 import CreatePostScreen from './src/navigation/stack/CreatePost';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            title: 'Home Screen',
-          }}
-        />
-        <Stack.Screen name="User" component={UserScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="CreatePost" component={CreatePostScreen} />
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={HomeScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };
