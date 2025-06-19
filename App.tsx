@@ -2,10 +2,10 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './src/navigation/home';
-import UserScreen from './src/navigation/user';
-import ProfileScreen from './src/navigation/profile';
-import CreatePostScreen from './src/navigation/CreatePost';
+import HomeScreen from './src/navigation/stack/home';
+import UserScreen from './src/navigation/stack/user';
+import ProfileScreen from './src/navigation/stack/profile';
+import CreatePostScreen from './src/navigation/stack/CreatePost';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
