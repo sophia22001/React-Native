@@ -3,6 +3,6 @@ module.exports = {
   extends: '@react-native',
   rules: {
     'react-native/no-inline-styles': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
+    'no-unused-vars': 'warn',
   },
 };
