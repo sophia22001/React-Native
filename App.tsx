@@ -4,7 +4,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Image, StyleSheet} from 'react-native';
-import HomeScreen from './src/navigation/tab/HomeTab';
 import HomeTab from './src/navigation/tab/HomeTab';
 import UserTab from './src/navigation/tab/UserTab';
 import MessageTab from './src/navigation/tab/MessageTab';
@@ -13,25 +12,21 @@ import HomeIcon from './assets/images/home.png';
 import UserIcon from './assets/images/user.png';
 import MessageIcon from './assets/images/messenger.png';
 
+import Icon from '@react-native-vector-icons/ionicons';
 const Tab = createBottomTabNavigator();
 
 const TabBarIcon = (focused, name) => {
-  let iconImagePath;
+  let iconName;
 
   if (name === 'Home') {
-    iconImagePath = HomeIcon;
+    iconName = 'home';
   } else if (name === 'User') {
-    iconImagePath = UserIcon;
+    iconName = 'people';
   } else if (name === 'Message') {
-    iconImagePath = MessageIcon;
+    iconName = 'mail';
   }
-
-  return (
-    <Image
-      style={{width: focused ? 28 : 23, height: focused ? 28 : 23}}
-      source={iconImagePath}
-    />
-  );
+  const iconSize = focused ? 30 : 20;
+  return <Icon name={iconName} size={iconSize} />;
 };
 
 const App = () => {
