@@ -1,32 +1,47 @@
 import React from 'react';
+import './gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
-import {StyleSheet} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './src/navigation/stack/home';
-import UserScreen from './src/navigation/stack/user';
-import ProfileScreen from './src/navigation/stack/profile';
-import CreatePostScreen from './src/navigation/stack/CreatePost';
-const Stack = createNativeStackNavigator();
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
+import HomeDrawer from './src/navigation/drawer/Home';
+import UserDrawer from './src/navigation/drawer/User';
+import CustomDrawerContent from './src/navigation/drawer/CustomDrawerContent';
+import HomeIcon from './assets/images/home.png';
+import MyDrawer from './src/navigation/drawer/MyDrawer';
+
+const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
+      <Drawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          drawerType: 'front',
+          drawerPosition: 'right',
+          drawerStyle: {
+            //backgroundColor: '#c6cbef',
+            width: 200,
+          },
+          drawerActiveTintColor: 'white',
+          drawerActiveBackgroundColor: '#003CB3',
+        }}
+        drawerContent={props => <MyDrawer {...props} />}>
+        <Drawer.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeDrawer}
           options={{
-            title: 'Home Screen',
+            drawerIcon: () => (
+              <Image source={HomeIcon} style={{width: 30, height: 30}} />
+            ),
           }}
         />
-        <Stack.Screen name="User" component={UserScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="CreatePost" component={CreatePostScreen} />
-      </Stack.Navigator>
+        <Drawer.Screen name="User" component={UserDrawer} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({});
